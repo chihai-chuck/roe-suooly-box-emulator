@@ -1,12 +1,13 @@
-const data = require("./data/1.js");
+const data = require("./data/blaze.js");
 
 
 class SupplyBoxLottery {
     constructor(list, key) {
-        this.list = list.sort((a, b) => b[key] - a[key]);
+        this.list = list;
         this.key = key;
         this.prizeGroup = {};
         this.setPrizeGroup();
+        this.rates = Object.keys(this.prizeGroup).map(n => +n);
     }
 
     setPrizeGroup() {
@@ -29,11 +30,10 @@ class SupplyBoxLottery {
     }
 
     calcRandomPrize() {
-        let result = this.list[0][this.key];
-        let sum = this.list.reduce((a, b) => a + b[this.key], 0);
-        for(let item of this.list) {
+        let result = this.rates[0];
+        let sum = this.rates.reduce((a, b) => a + b);
+        for(let rate of this.rates) {
             const rand = Math.random() * sum;
-            const rate = item[this.key];
             if(rand <= rate) {
                 result = rate;
                 break;
@@ -51,8 +51,29 @@ class SupplyBoxLottery {
         }
         return res;
     }
+
+    static getLevelTotal(list) {
+        const total = {
+            1: 0,
+            2: 0,
+            3: 0
+        };
+        for(let i of list) {
+            total[i.level]++;
+        }
+        const probability = {};
+        for(let j=1; j<4; j++) {
+            probability[j] = total[j] / list.length;
+        }
+        return {
+            total,
+            probability
+        };
+    }
 }
 
 
 const testC = new SupplyBoxLottery(data, "rate");
-console.log(testC.getResult(10));
+const testR = testC.getResult(100);
+console.log(testR);
+console.log(SupplyBoxLottery.getLevelTotal(testR));
