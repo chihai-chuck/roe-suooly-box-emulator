@@ -49,7 +49,7 @@ class SupplyBoxLottery {
         for(let i=0; i<num; i++) {
             res.push(this.calcRandomPrize());
         }
-        return res.length > 1 ? res : res[0];
+        return res;
     }
 }
 
