@@ -1,6 +1,3 @@
-const data = require("./data/blaze.js");
-
-
 class SupplyBoxLottery {
     constructor(list, key) {
         this.list = list;
@@ -71,9 +68,3 @@ class SupplyBoxLottery {
         };
     }
 }
-
-
-const testC = new SupplyBoxLottery(data, "rate");
-const testR = testC.getResult(100);
-console.log(testR);
-console.log(SupplyBoxLottery.getLevelTotal(testR));
