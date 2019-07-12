@@ -68,3 +68,5 @@ class SupplyBoxLottery {
         };
     }
 }
+
+module.exports = SupplyBoxLottery;
