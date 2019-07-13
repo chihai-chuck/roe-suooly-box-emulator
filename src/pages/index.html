@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <script src="../controllers/lib/vue.min.js"></script>
+    <script src="../controllers/base.js"></script>
+    <script src="../controllers/supply-box-lottery.js"></script>
     <link rel="stylesheet" href="../styles/heybox-shim.less">
     <link rel="stylesheet" href="../styles/index.less">
     <!-- inject:css -->
@@ -13,10 +15,30 @@
 <body>
     <div class="supply-box-emulator">
         <p class="loading" v-cloak></p>
+        <div class="supply-box-emulator-bg">
+            <button @click="open()"></button>
+        </div>
+        <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>
+        <ul class="supply-box-emulator-record-list">
+            <li v-for="item in data.record">
+                <img :src="item.img" :alt="item.name">
+                <p :class="'level-color-'+item.level" v-text="item.name"></p>
+            </li>
+        </ul>
 
+        <transition name="fade">
+            <div ref="popup" class="supply-box-emulator-popup" @touchstart.stop.prevent="popupTouch" v-show="visible.result">
+                <div class="supply-box-emulator-popup-bg"></div>
+                <div ref="popupContent" class="supply-box-emulator-popup-content">
+                    <div class="supply-box-emulator-result">
+                        <p :class="'level-color-'+data.result.single.level" v-text="data.result.single.name"></p>
+                        <img :src="data.result.single.img" :alt="data.result.single.name">
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 
-    <script src="../controllers/supply-box-lottery.js"></script>
     <script src="../controllers/index.js"></script>
     <!-- inject:js -->
     <!-- endinject -->

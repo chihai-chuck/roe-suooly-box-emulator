@@ -8,6 +8,9 @@ const gulp = require('gulp'),
     concat = require('gulp-concat'),
     csso = require('gulp-csso'),
     postcss = require('gulp-postcss'),
+    pxtorem = require('postcss-pxtorem'),
+    short = require('postcss-short'),
+    cssnext = require('postcss-cssnext'),
     imagemin = require('gulp-imagemin'),
     cache = require('gulp-cache'),
     base64 = require('gulp-base64'),
@@ -45,8 +48,13 @@ gulp.task('build:less', () => {
             maxImageSize: 10240
         }))
         .pipe(postcss([
-            require('postcss-short'),
-            require('postcss-cssnext')
+            pxtorem({
+                rootValue: 40,
+                propList: ["*"],
+                minPixelValue: 2
+            }),
+            short(),
+            cssnext()
         ]))
         .pipe(csso())
         .pipe(gulp.dest('./dist/styles'))
@@ -88,7 +96,9 @@ gulp.task('replace:js', () => {
     return gulp.src('./dist/controllers/**/*.js')
         .pipe(order([
             "lib/*.js",
-            "*.js"
+            "base.js",
+            "supply-box-lottery.js",
+            "index.js"
         ]))
         .pipe(concat('main.js'))
         .pipe(gulp.dest('./dist'))

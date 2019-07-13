@@ -49,12 +49,18 @@ class SupplyBoxLottery {
         return res;
     }
 
-    static getLevelTotal(list) {
+    getLevelTotal(list) {
         const total = {
             1: 0,
             2: 0,
             3: 0
         };
+        if(!list.length) {
+            return {
+                total,
+                probability: total
+            }
+        }
         for(let i of list) {
             total[i.level]++;
         }
@@ -69,4 +75,4 @@ class SupplyBoxLottery {
     }
 }
 
-module.exports = SupplyBoxLottery;
+if(typeof module !== "undefined") module.exports = SupplyBoxLottery;

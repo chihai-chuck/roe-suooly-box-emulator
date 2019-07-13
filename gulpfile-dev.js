@@ -6,6 +6,9 @@ const gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     csso = require('gulp-csso'),
     postcss = require('gulp-postcss'),
+    pxtorem = require('postcss-pxtorem'),
+    short = require('postcss-short'),
+    cssnext = require('postcss-cssnext'),
     imagemin = require('gulp-imagemin'),
     cache = require('gulp-cache'),
     base64 = require('gulp-base64'),
@@ -40,8 +43,13 @@ gulp.task('build:less', () => {
             maxImageSize: 20480
         }))
         .pipe(postcss([
-            require('postcss-short'),
-            require('postcss-cssnext')
+            pxtorem({
+                rootValue: 40,
+                propList: ["*"],
+                minPixelValue: 2
+            }),
+            short(),
+            cssnext()
         ]))
         .pipe(csso())
         .pipe(sourcemaps.write())
