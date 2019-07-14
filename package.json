@@ -5,7 +5,17 @@
     "main": "gulpfile.js",
     "scripts": {
         "dev-blaze": "gulp dev --gulpfile gulpfile-dev.js --type blaze",
-        "build-blaze": "gulp build --type blaze"
+        "dev-electrified": "gulp dev --gulpfile gulpfile-dev.js --type electrified",
+        "dev-thunder": "gulp dev --gulpfile gulpfile-dev.js --type thunder",
+        "dev-infinity": "gulp dev --gulpfile gulpfile-dev.js --type infinity",
+        "dev-neon-maniac": "gulp dev --gulpfile gulpfile-dev.js --type neon-maniac",
+        "dev-starlight": "gulp dev --gulpfile gulpfile-dev.js --type starlight",
+        "build-blaze": "gulp build --type blaze",
+        "build-electrified": "gulp build --type electrified",
+        "build-thunder": "gulp build --type thunder",
+        "build-infinity": "gulp build --type infinity",
+        "build-neon-maniac": "gulp build --type neon-maniac",
+        "build-starlight": "gulp build --type starlight"
     },
     "author": "chuck@chihai.me",
     "devDependencies": {

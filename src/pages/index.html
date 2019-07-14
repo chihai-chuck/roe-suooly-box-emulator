@@ -20,9 +20,9 @@
         </div>
         <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>
         <ul class="supply-box-emulator-record-list">
-            <li v-for="item in data.record">
-                <img :src="item.img" :alt="item.name">
-                <p :class="'level-color-'+item.level" v-text="item.name"></p>
+            <li v-for="i in data.record">
+                <img :src="data.boxItem[i].img" :alt="data.boxItem[i].name">
+                <p :class="'level-color-'+data.boxItem[i].level" v-text="data.boxItem[i].name"></p>
             </li>
         </ul>
 
@@ -31,8 +31,8 @@
                 <div class="supply-box-emulator-popup-bg"></div>
                 <div ref="popupContent" class="supply-box-emulator-popup-content">
                     <div class="supply-box-emulator-result">
-                        <p :class="'level-color-'+data.result.single.level" v-text="data.result.single.name"></p>
-                        <img :src="data.result.single.img" :alt="data.result.single.name">
+                        <p :class="'level-color-'+resultSingleItem.level" v-text="resultSingleItem.name"></p>
+                        <img :src="resultSingleItem.img" :alt="resultSingleItem.name">
                     </div>
                 </div>
             </div>

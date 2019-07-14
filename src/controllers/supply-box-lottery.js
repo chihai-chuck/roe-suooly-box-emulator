@@ -23,7 +23,7 @@ class SupplyBoxLottery {
         if(length > 1) {
             index = Math.floor(Math.random() * length);
         }
-        return this.prizeGroup[key][index];
+        return this.prizeGroup[key][index].index;
     }
 
     calcRandomPrize() {
@@ -62,7 +62,8 @@ class SupplyBoxLottery {
             }
         }
         for(let i of list) {
-            total[i.level]++;
+            const item = this.list[i];
+            total[item.level]++;
         }
         const probability = {};
         for(let j=1; j<4; j++) {

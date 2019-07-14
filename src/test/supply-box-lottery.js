@@ -5,4 +5,4 @@ const supplyBoxLottery = new SupplyBoxLottery(data, "rate");
 const result = supplyBoxLottery.getResult(12);
 
 console.log(result);
-console.log(SupplyBoxLottery.getLevelTotal(result));
+console.log(supplyBoxLottery.getLevelTotal(result));
