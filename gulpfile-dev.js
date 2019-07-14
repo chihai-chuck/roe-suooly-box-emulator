@@ -27,6 +27,7 @@ gulp.task('build:js', gulp.series('build:lib', () => {
     return gulp.src(['./src/controllers/**/*.js', '!./src/controllers/lib/*.js'])
         .pipe(sourcemaps.init())
         .pipe(replace('"{{replace-data}}"', JSON.stringify(require("./data/"+process.argv[process.argv.length-1]))))
+        .pipe(replace('{{replace-version}}', process.argv[process.argv.length-1]))
         .pipe(babel({
             babelrc: true
         }))

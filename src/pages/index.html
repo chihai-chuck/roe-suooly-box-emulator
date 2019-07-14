@@ -15,7 +15,7 @@
 <body>
     <div class="supply-box-emulator">
         <p class="loading" v-cloak></p>
-        <div class="supply-box-emulator-bg">
+        <div class="supply-box-emulator-bg" :style="{backgroundImage:`url(//cdn.max-c.com/wiki/755790/supply-box-${config.version}-bg.jpg?v=99)`}">
             <button @click="open()"></button>
         </div>
         <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>

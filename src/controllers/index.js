@@ -3,6 +3,7 @@ new Vue({
     data() {
         return {
             config: {
+                version: "{{replace-version}}",
                 color: {
                     1: "#abd33f",
                     2: "#62c8ff",
