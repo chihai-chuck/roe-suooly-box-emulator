@@ -1,4 +1,5 @@
-const data = require("../../data/blaze");
+// const data = require("../../data/blaze");
+const data = require("../../data/electrified");
 const SupplyBoxLottery = require("../controllers/supply-box-lottery");
 
 const supplyBoxLottery = new SupplyBoxLottery(data, "rate");
