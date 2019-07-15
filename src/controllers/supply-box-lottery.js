@@ -4,7 +4,7 @@ class SupplyBoxLottery {
         this.key = key;
         this.prizeGroup = {};
         this.setPrizeGroup();
-        this.rates = Object.keys(this.prizeGroup).map(n => +n);
+        this.rates = this.list.map(i => i.rate);
     }
 
     setPrizeGroup() {

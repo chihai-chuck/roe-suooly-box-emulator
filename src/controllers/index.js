@@ -4,6 +4,7 @@ new Vue({
         return {
             config: {
                 version: "{{replace-version}}",
+                localDataVersion: 1,
                 color: {
                     1: "#abd33f",
                     2: "#62c8ff",
@@ -34,7 +35,8 @@ new Vue({
     },
     created() {
         this.supplyBoxLottery = new SupplyBoxLottery(this.data.boxItem, "rate");
-        this.data.record = JSON.parse(localStorage["roeSupplyBoxEmulatorRecord_"+this.config.version]||"[]");
+        this.localDataCacheClear();
+        this.data.record = JSON.parse(localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}_${this.config.localDataVersion}`]||"[]");
         this.loadImgCache();
     },
     methods: {
@@ -45,7 +47,7 @@ new Vue({
                 this.visible.result = true;
             }
             this.data.record.unshift(...res);
-            localStorage["roeSupplyBoxEmulatorRecord_"+this.config.version] = JSON.stringify(this.data.record);
+            localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}_${this.config.localDataVersion}`] = JSON.stringify(this.data.record);
         },
         popupTouch(event) {
             event.stopPropagation();
@@ -57,6 +59,15 @@ new Vue({
             for(let i of this.data.boxItem) {
                 const $img = document.createElement("img");
                 $img.src = i.img;
+            }
+        },
+        localDataCacheClear() {
+            for(let i=0; i<this.config.localDataVersion; i++) {
+                if(i === 0) {
+                    localStorage.removeItem(localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}`]);
+                } else {
+                    localStorage.removeItem(localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}_${i}`]);
+                }
             }
         }
     }
