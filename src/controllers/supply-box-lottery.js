@@ -42,11 +42,7 @@ class SupplyBoxLottery {
     }
 
     getResult(num = 1) {
-        const res = [];
-        for(let i=0; i<num; i++) {
-            res.push(this.calcRandomPrize());
-        }
-        return res;
+        return Array(num).fill().map(() => this.calcRandomPrize());
     }
 
     getLevelTotal(list) {
@@ -66,7 +62,7 @@ class SupplyBoxLottery {
             total[item.level]++;
         }
         const probability = {};
-        for(let j=1; j<4; j++) {
+        for(let j of Object.keys(total)) {
             probability[j] = total[j] / list.length;
         }
         return {
