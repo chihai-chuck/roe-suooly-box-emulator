@@ -2,43 +2,21 @@ class SupplyBoxLottery {
     constructor(list, key) {
         this.list = list;
         this.key = key;
-        this.prizeGroup = {};
-        this.setPrizeGroup();
-        this.rates = this.list.map(i => i.rate);
-    }
-
-    setPrizeGroup() {
-        for(let item of this.list) {
-            if(this.prizeGroup[item[this.key]]) {
-                this.prizeGroup[item[this.key]].push(item);
-            } else {
-                this.prizeGroup[item[this.key]] = [item];
-            }
-        }
-    }
-
-    getPrizeGroup(key) {
-        const length = this.prizeGroup[key].length;
-        let index = 0;
-        if(length > 1) {
-            index = Math.floor(Math.random() * length);
-        }
-        return this.prizeGroup[key][index].index;
     }
 
     calcRandomPrize() {
-        let result = this.rates[0];
-        let sum = this.rates.reduce((a, b) => a + b);
-        for(let rate of this.rates) {
-            const rand = Math.random() * sum;
-            if(rand <= rate) {
-                result = rate;
+        let result = this.list[0][this.key];
+        let sum = this.list.reduce((a, b) => a + b[this.key], 0);
+        for(let item of this.list) {
+            const rate = item[this.key];
+            if(Math.random() * sum <= rate) {
+                result = item;
                 break;
             } else {
                 sum -= rate;
             }
         }
-        return this.getPrizeGroup(result);
+        return result.index;
     }
 
     getResult(num = 1) {
