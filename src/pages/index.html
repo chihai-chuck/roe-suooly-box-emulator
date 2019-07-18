@@ -16,23 +16,49 @@
     <div class="supply-box-emulator">
         <p class="loading" v-cloak></p>
         <div class="supply-box-emulator-bg" :style="{backgroundImage:`url(//cdn.max-c.com/wiki/755790/supply-box-${config.version}-bg.jpg?v=99)`}">
+            <i class="icon-about" @click="visible.about=true"></i>
             <button @click="open()"></button>
         </div>
         <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>
         <ul class="supply-box-emulator-record-list">
             <li v-for="i in data.record">
-                <img :src="data.boxItem[i].img" :alt="data.boxItem[i].name">
+                <div class="img" :style="{backgroundImage:`url(${data.boxItem[i].img})`}"></div>
                 <p :class="'level-color-'+data.boxItem[i].level" v-text="data.boxItem[i].name"></p>
             </li>
         </ul>
 
         <transition name="fade">
-            <div ref="popup" class="supply-box-emulator-popup" @touchstart.stop.prevent="popupTouch" v-show="visible.result">
+            <div class="supply-box-emulator-popup" @touchstart.stop.prevent="closeResult" v-show="visible.result">
                 <div class="supply-box-emulator-popup-bg"></div>
-                <div ref="popupContent" class="supply-box-emulator-popup-content">
+                <div class="supply-box-emulator-popup-content">
                     <div class="supply-box-emulator-result">
                         <p :class="'level-color-'+resultSingleItem.level" v-text="resultSingleItem.name"></p>
                         <img :src="resultSingleItem.img" :alt="resultSingleItem.name">
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <transition name="fade">
+            <div ref="aboutPopup" class="supply-box-emulator-popup" @touchstart.stop.prevent="closeAbout" v-if="visible.about">
+                <div class="supply-box-emulator-popup-bg"></div>
+                <div ref="aboutPopupContent" class="supply-box-emulator-popup-content">
+                    <div class="supply-box-emulator-about">
+                        <i class="icon-about title">关于ROE开箱模拟器</i>
+                        <article>
+                            <p>程序 & 设计：<span class="editor-name" data-id="875495">柳飞花落</span></p>
+                            <p>数据：<span class="editor-name" data-id="13472364">Glory</span></p>
+                            <p>图片：<span class="editor-name" data-id="357073">茨木饼干</span></p>
+
+                            <h5>更新记录</h5>
+                            <ul>
+                                <li>2019-07-15 修复开箱随机算法可能导致低概率奖励超常概率出现的问题</li>
+                                <li>2019-07-14 完成箱子数据录入，完成开箱历史数据存储</li>
+                                <li>2019-07-13 完成UI界面</li>
+                                <li>2019-07-11 完成开箱随机算法</li>
+                                <li>2019-07-10 开始制作</li>
+                            </ul>
+                        </article>
                     </div>
                 </div>
             </div>

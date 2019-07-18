@@ -20,7 +20,8 @@ new Vue({
                 record: []
             },
             visible: {
-                result: false
+                result: false,
+                about: true
             },
             supplyBoxLottery: {}
         }
@@ -49,11 +50,9 @@ new Vue({
             this.data.record.unshift(...res);
             localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}_${this.config.localDataVersion}`] = JSON.stringify(this.data.record);
         },
-        popupTouch(event) {
+        closeResult(event) {
             event.stopPropagation();
-            if(event.target === this.$refs.popup || event.target === this.$refs.popupContent) {
-                this.visible.result = false;
-            }
+            this.visible.result = false;
         },
         loadImgCache() {
             for(let i of this.data.boxItem) {
@@ -68,6 +67,12 @@ new Vue({
                 } else {
                     localStorage.removeItem(localStorage[`roeSupplyBoxEmulatorRecord_${this.config.version}_${i}`]);
                 }
+            }
+        },
+        closeAbout(event) {
+            event.stopPropagation();
+            if(event.target === this.$refs.aboutPopup || event.target === this.$refs.aboutPopupContent) {
+                this.visible.about = false;
             }
         }
     }
