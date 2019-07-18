@@ -16,7 +16,7 @@
     <div class="supply-box-emulator">
         <p class="loading" v-cloak></p>
         <div class="supply-box-emulator-bg" :style="{backgroundImage:`url(//cdn.max-c.com/wiki/755790/supply-box-${config.version}-bg.jpg?v=99)`}">
-            <i class="icon-about" @click="visible.about=true"></i>
+            <i class="icon-about" @click="showAbout"></i>
             <button @click="open()"></button>
         </div>
         <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>
@@ -40,16 +40,15 @@
         </transition>
 
         <transition name="fade">
-            <div ref="aboutPopup" class="supply-box-emulator-popup" @touchstart.stop.prevent="closeAbout" v-if="visible.about">
+            <div ref="aboutPopup" class="supply-box-emulator-popup" @touchstart.stop="closeAbout" v-if="visible.about">
                 <div class="supply-box-emulator-popup-bg"></div>
                 <div ref="aboutPopupContent" class="supply-box-emulator-popup-content">
                     <div class="supply-box-emulator-about">
                         <i class="icon-about title">关于ROE开箱模拟器</i>
-                        <article>
-                            <p>程序 & 设计：<span class="editor-name" data-id="875495">柳飞花落</span></p>
-                            <p>数据：<span class="editor-name" data-id="13472364">Glory</span></p>
-                            <p>图片：<span class="editor-name" data-id="357073">茨木饼干</span></p>
-
+                        <div class="article">
+                            <p>程序 & 设计：<span @touchstart.prevent="toUser(875495)">柳飞花落</span></p>
+                            <p>数据：<span @touchstart.prevent="toUser(357073)">Glory</span></p>
+                            <p>图片：<span @touchstart.prevent="toUser(13472364)">茨木饼干</span></p>
                             <h5>更新记录</h5>
                             <ul>
                                 <li>2019-07-15 修复开箱随机算法可能导致低概率奖励超常概率出现的问题</li>
@@ -58,7 +57,7 @@
                                 <li>2019-07-11 完成开箱随机算法</li>
                                 <li>2019-07-10 开始制作</li>
                             </ul>
-                        </article>
+                        </div>
                     </div>
                 </div>
             </div>

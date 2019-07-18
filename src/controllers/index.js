@@ -21,7 +21,7 @@ new Vue({
             },
             visible: {
                 result: false,
-                about: true
+                about: false
             },
             supplyBoxLottery: {}
         }
@@ -69,11 +69,19 @@ new Vue({
                 }
             }
         },
+        showAbout() {
+            this.visible.about = true;
+        },
         closeAbout(event) {
-            event.stopPropagation();
             if(event.target === this.$refs.aboutPopup || event.target === this.$refs.aboutPopupContent) {
                 this.visible.about = false;
             }
+        },
+        toUser(id) {
+            location.href = "heybox://" + encodeURIComponent(JSON.stringify({
+                "protocol_type": "openUser",
+                "user_id": id.toString()
+            }));
         }
     }
 });
