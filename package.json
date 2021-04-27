@@ -15,7 +15,8 @@
         "build-thunder": "gulp build --type thunder",
         "build-infinity": "gulp build --type infinity",
         "build-neon-maniac": "gulp build --type neon-maniac",
-        "build-starlight": "gulp build --type starlight"
+        "build-starlight": "gulp build --type starlight",
+        "up": "yarn upgrade-interactive --latest"
     },
     "author": "chuck@chihai.me",
     "devDependencies": {

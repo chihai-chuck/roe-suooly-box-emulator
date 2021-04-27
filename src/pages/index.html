@@ -16,8 +16,8 @@
     <div class="supply-box-emulator">
         <p class="loading" v-cloak></p>
         <div class="supply-box-emulator-bg" :style="{backgroundImage:`url(//cdn.max-c.com/wiki/755790/supply-box-${config.version}-bg.jpg?v=99)`}">
-            <i class="icon-about" @click="showAbout"></i>
-            <button @click="open()"></button>
+            <i class="icon-about" v-on:touchstart.stop.prevent="showAbout"></i>
+            <button v-on:touchstart.stop.prevent="open()"></button>
         </div>
         <p class="supply-box-emulator-record-title">开箱历史记录<span><em v-text="levelTotal.total['1']"></em><em v-text="levelTotal.total['2']"></em><em v-text="levelTotal.total['3']"></em><b v-text="`总计: ${data.record.length}`"></b></span></p>
         <ul class="supply-box-emulator-record-list">
@@ -28,7 +28,7 @@
         </ul>
 
         <transition name="fade">
-            <div class="supply-box-emulator-popup" @touchstart.stop.prevent="closeResult" v-show="visible.result">
+            <div class="supply-box-emulator-popup" v-on:touchstart.stop.prevent="closeResult" v-show="visible.result">
                 <div class="supply-box-emulator-popup-bg"></div>
                 <div class="supply-box-emulator-popup-content">
                     <div class="supply-box-emulator-result">
@@ -40,17 +40,18 @@
         </transition>
 
         <transition name="fade">
-            <div ref="aboutPopup" class="supply-box-emulator-popup" @touchstart.stop="closeAbout" v-if="visible.about">
+            <div ref="aboutPopup" class="supply-box-emulator-popup" v-on:touchstart.stop="closeAbout" v-if="visible.about">
                 <div class="supply-box-emulator-popup-bg"></div>
                 <div ref="aboutPopupContent" class="supply-box-emulator-popup-content">
                     <div class="supply-box-emulator-about">
                         <i class="icon-about title">关于ROE开箱模拟器</i>
                         <div class="article">
-                            <p>程序 & 设计：<span @touchstart.prevent="toUser(875495)">柳飞花落</span></p>
-                            <p>数据：<span @touchstart.prevent="toUser(357073)">Glory</span></p>
-                            <p>图片：<span @touchstart.prevent="toUser(13472364)">茨木饼干</span></p>
+                            <p>程序 & 设计：<span v-on:touchstart.prevent="toUser(875495)">柳飞花落</span></p>
+                            <p>数据：<span v-on:touchstart.prevent="toUser(357073)">Glory</span></p>
+                            <p>图片：<span v-on:touchstart.prevent="toUser(13472364)">茨木饼干</span></p>
                             <h5>更新记录</h5>
                             <ul>
+                                <li>2021-04-27 修复点击事件失效的问题</li>
                                 <li>2019-07-15 修复开箱随机算法可能导致低概率奖励超常概率出现的问题</li>
                                 <li>2019-07-14 完成箱子数据录入，完成开箱历史数据存储</li>
                                 <li>2019-07-13 完成UI界面</li>

@@ -1,4 +1,4 @@
-new Vue({
+window.rsbe = new Vue({
     el: ".supply-box-emulator",
     data() {
         return {
